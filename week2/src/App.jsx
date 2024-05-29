@@ -1,9 +1,15 @@
+import React from "react";
+import MovieList from "./MovieList";
 import "./App.css";
-import Todo from "./todolist_duggy";
-import Movie from "./movie";
 
 function App() {
-  return <Todo />;
+  return (
+    <div className="background">
+      <h1 className="header-title">Movies</h1>
+      <hr />
+      <MovieList />
+    </div>
+  );
 }
 
 export default App;
