@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .container input[type="submit"] {
+            background-color: #7c7af9;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 10px 20px; 
+            font-weight: bold;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #ffffff;
+            max-width: 400px;
+            border-radius: 5px;
+            position: relative; 
+            text-align: center;
+        }
+
+        .close-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #9e9e9e;
+            padding: 5px 10px; 
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>회원가입</h2>
+        <form action="/" method="post" id="signupForm">
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name">
+            <div id="nameError" class="error"></div> <!-- 이름 입력 에러 메시지 -->
+
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email">
+
+            <label for="age">나이:</label>
+            <input type="text" id="age" name="age">
+
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password">
+
+            <label for="confirm_password">비밀번호 확인:</label>
+            <input type="password" id="confirm_password" name="confirm_password">
+
+            <input type="submit" value="가입하기">
+        </form>
+    </div>
+
+    <!-- 모달 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">닫기</span>
+            <h2>가입 성공!</h2>
+            <p>회원가입을 축하합니다!</p>
+        </div>
+    </div>
+
+    <script>
+        // 모달 열기 함수
+        function showModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+        }
+
+        // 모달 닫기 함수
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        // 가입하기 버튼 클릭 시 모달 열기
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // 회원가입 폼이 제출될 때 새로고침 되는 것을 막아줌.
+
+            // 이름이 입력되었는지 확인
+            var nameInput = document.getElementById("name").value;
+            var nameError = document.getElementById("nameError");
+
+            if (nameInput === "") {
+                nameError.innerHTML = "필수 항목입니다!";
+                return;
+            }
+
+            // 이름이 문자열인지 확인
+            if (!isNaN(nameInput)) {
+                nameError.innerHTML = "문자열로 입력해주세요!";
+                return;
+            }
+
+            showModal(); // 모달 열기
+        });
+    </script>
+
+</body>
+</html>

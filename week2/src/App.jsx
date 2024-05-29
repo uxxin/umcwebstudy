@@ -1,13 +1,9 @@
-//컴포넌트 합치는 코드 개념
 import "./App.css";
-import Todo from "./todolist";
+import Todo from "./todolist_duggy";
+import Movie from "./movie";
 
 function App() {
-  return (
-    <>
-      <Todo />
-    </>
-  );
+  return <Todo />;
 }
 
 export default App;
