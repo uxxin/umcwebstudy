@@ -15,7 +15,6 @@ function App() {
                 <h2>{movie.title}</h2>
                 <p>{movie.overview}</p>
               </div>
-
               <div className="movie-poster-container">
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
