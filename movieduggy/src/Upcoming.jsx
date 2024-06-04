@@ -1,7 +1,12 @@
 import React from "react";
 
-function Upcoming() {
-  return <h2>Upcoming Movies</h2>;
-}
+const Upcoming = () => {
+  return (
+    <div>
+      <h1>Upcoming Movies</h1>
+      {/* Upcoming movies content */}
+    </div>
+  );
+};
 
 export default Upcoming;
