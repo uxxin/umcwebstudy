@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"; //Link 추가
 import styled from "styled-components";
-import Header2 from "./header2";
-import Movie from "./Movie";
-import MainPage from "./MainPage";
-import NowPlayingPage from "./NowPlayingPage";
-import PopularPage from "./PopularPage";
-import TopRatedPage from "./TopRatedPage";
-import Upcoming from "./Upcoming";
+import Header2 from "./components/header2";
+import Movie from "./pages/Movie";
+import MainPage from "./pages/MainPage";
+import NowPlayingPage from "./pages/NowPlayingPage";
+import PopularPage from "./pages/PopularPage";
+import TopRatedPage from "./pages/TopRatedPage";
+import Upcoming from "./pages/Upcoming";
 
 function App() {
   return (

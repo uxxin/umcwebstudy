@@ -1,39 +1,47 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
-export default function Movie() {
-  const [movielist, setmovielist] = useState([]);
-  console.log(movielist);
-
-  const getMovie = () => {
+const TopRatedPage = () => {
+  const [topRatedList, setTopRatedList] = useState([]);
+  const getTopRatedMovie = () => {
     fetch(
-      "https://api.themoviedb.org/3/discover/movie?api_key=664cb6a408c7321bb643e21b1ca7f837"
+      "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_key=664cb6a408c7321bb643e21b1ca7f837"
     )
       .then((res) => res.json())
-      .then((json) => setmovielist(json.results));
+      .then((json) => setTopRatedList(json.results));
   };
 
   useEffect(() => {
-    getMovie();
+    getTopRatedMovie();
   }, []);
+
+  useEffect(() => {
+    console.log(topRatedList);
+  }, [topRatedList]);
 
   return (
     <Container>
-      {movielist.map((movie) => (
-        <Card key={movie.id}>
-          <Image
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-          />
-          <Title>
-            <MovieTitle>{movie.title}</MovieTitle>
-            <Rating>{movie.vote_average.toFixed(1)}</Rating>
-          </Title>
-        </Card>
-      ))}
+      {topRatedList.map(
+        (
+          movie //map이 for문 movie가 i 느낌
+        ) => (
+          <Card key={movie.id}>
+            <Image
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <Title>
+              <MovieTitle>{movie.title}</MovieTitle>
+              <Rating>{movie.vote_average.toFixed(1)}</Rating>{" "}
+              {/* toFixed는 소수점 한자리 */}
+            </Title>
+          </Card>
+        )
+      )}
     </Container>
   );
-}
+};
+
+export default TopRatedPage;
 
 const Container = styled.div`
   display: flex;
