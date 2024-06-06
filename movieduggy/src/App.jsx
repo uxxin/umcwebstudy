@@ -15,13 +15,13 @@ function App() {
     <Router>
       <AppContainer>
         <HeaderContainer>
-          <Header to="/mainpage">UMC Movie</Header>
+          <Header to="/">UMC Movie</Header>
           <Header2 />
         </HeaderContainer>
         <Content>
           <Routes>
-            <Route path="/" element={<Movie />} />
-            <Route path="/mainpage" element={<MainPage />} />
+            <Route path="/movie" element={<Movie />} />
+            <Route path="/" element={<MainPage />} />
             <Route path="/popular" element={<PopularPage />} />
             <Route path="/nowplaying" element={<NowPlayingPage />} />
             <Route path="/toprated" element={<TopRatedPage />} />
@@ -38,9 +38,9 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  justify-content: center;
   background-color: #f0f0f0;
-  //min-height: 100vh;
+  min-height: 100vh;
   //height: 100vh;
   width: 100vw;
 `;
@@ -73,7 +73,6 @@ const Content = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 20px;
   padding-top: 60px;
 `;
 

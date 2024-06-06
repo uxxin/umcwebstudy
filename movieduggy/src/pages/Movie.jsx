@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Movie() {
@@ -20,10 +21,16 @@ export default function Movie() {
     console.log(movielist);
   }, [movielist]);
 
+  const navigation = useNavigate();
+
+  const toDetailPage = (movie) => {
+    navigation(`/movie/${movie.id}`, { state: { movie: movie } });
+  };
+
   return (
     <Container>
       {movielist.map((movie) => (
-        <Card key={movie.id}>
+        <Card key={movie.id} onClick={() => toDetailPage(movie)}>
           <Image
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
