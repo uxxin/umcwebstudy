@@ -1,45 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import MovieCard from "../components/MovieCard";
+import { getMovie } from "../apis/movie";
 
 export default function Movie() {
   const [movielist, setmovielist] = useState([]);
 
-  const getMovie = () => {
-    fetch(
-      "https://api.themoviedb.org/3/discover/movie?api_key=664cb6a408c7321bb643e21b1ca7f837"
-    )
-      .then((res) => res.json())
-      .then((json) => setmovielist(json.results));
-  };
-
   useEffect(() => {
-    getMovie();
+    getMovie()
+      .then((res) => {
+        //getmovie의 결과값을 res로 받음(= response.data)
+        console.log(res);
+        setmovielist(res.results); //movielist 저장
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
-    console.log(movielist);
+    //console.log(movielist);
   }, [movielist]);
-
-  const navigation = useNavigate();
-
-  const toDetailPage = (movie) => {
-    navigation(`/movie/${movie.id}`, { state: { movie: movie } });
-  };
 
   return (
     <Container>
       {movielist.map((movie) => (
-        <Card key={movie.id} onClick={() => toDetailPage(movie)}>
-          <Image
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-          />
-          <Title>
-            <MovieTitle>{movie.title}</MovieTitle>
-            <Rating>{movie.vote_average.toFixed(1)}</Rating>
-          </Title>
-        </Card>
+        <MovieCard movie={movie} /> //key-value 느낌
       ))}
     </Container>
   );

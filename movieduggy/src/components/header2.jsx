@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -32,19 +32,29 @@ const NavButton = styled(Link)`
 const Header2 = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken"); //key는 무조건 "" 사용
+    if (accessToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [localStorage.getItem("accessToken")]); //accessToken을 함수 안에서 정의했기 때문에 사용하려면 이렇게
+
+  const navigation = useNavigate();
+
   const handleLogin = () => {
-    setIsLoggedIn(true);
+    navigation("/login");
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    localStorage.removeItem("accessToken");
+    navigation("/");
   };
-
-  const navigate = useNavigate();
 
   return (
     <Container>
-      {isLoggedIn ? (
+      {isLoggedIn ? ( //보통 local storage에 토큰이 있냐 없냐로 판단
         <LoginButton onClick={handleLogout}>로그아웃</LoginButton>
       ) : (
         <LoginButton onClick={handleLogin}>로그인</LoginButton>

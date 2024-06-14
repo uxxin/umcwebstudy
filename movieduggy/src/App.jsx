@@ -9,6 +9,8 @@ import PopularPage from "./pages/PopularPage";
 import TopRatedPage from "./pages/TopRatedPage";
 import Upcoming from "./pages/Upcoming";
 import DetailPage from "./pages/DetailPage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
             <Route path="/toprated" element={<TopRatedPage />} />
             <Route path="/upcoming" element={<Upcoming />} />
             <Route path="/movie/:id" element={<DetailPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </Content>
       </AppContainer>
@@ -50,7 +54,8 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  background-color: #5aaaff;
+  //background-color: #5aaaff;
+  background-color: #1a1a40;
   padding: 8px;
   //border-radius: 10px;
   position: fixed;
@@ -67,6 +72,7 @@ const Header = styled(Link)`
   padding: 10px;
   text-decoration: none; /* 링크 스타일을 제거합니다 */
   cursor: pointer;
+  font-weight: bold;
 `;
 
 const Content = styled.div`

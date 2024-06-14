@@ -1,31 +1,40 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import StarRating from "../components/StarRating";
 
 const DetailPage = () => {
   const {
     state: { movie },
   } = useLocation();
 
+  const overviewText =
+    movie.overview.length > 0
+      ? movie.overview
+      : "TMDB에서 제공하는 API에 상세 줄거리 정보가 없습니다.";
+
   return (
-    <Container>
+    <Container
+      backgroundUrl={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+    >
+      <Overlay />
       <Wrapper>
         <Poster
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
-        ></Poster>
+        />
         <MovieDetail>
-          <Title>{movie.Title}</Title>
+          <Title>{movie.title}</Title>
           <AverageVote>
             <AverageVoteTitle>평점</AverageVoteTitle>
-            <Star>{movie.vote_average}</Star>
+            <StarRating rating={movie.vote_average} />
           </AverageVote>
           <ReleaseDate>
             <DateTitle>개봉일</DateTitle>
             <Date>{movie.release_date}</Date>
           </ReleaseDate>
           <Overview>줄거리</Overview>
-          <OverviewDetail>{movie.overview}</OverviewDetail>
+          <OverviewDetail>{overviewText}</OverviewDetail>
         </MovieDetail>
       </Wrapper>
     </Container>
@@ -40,41 +49,91 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #322e2e;
+  background: url(${(props) => props.backgroundUrl}) no-repeat center
+    center/cover;
+  position: relative;
+  color: #fff;
+  padding: 20px;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
 `;
 
 const Wrapper = styled.div`
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: rgba(40, 40, 40, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 `;
 
 const Poster = styled.img`
   width: 300px;
-  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 `;
 
 const MovieDetail = styled.div`
-  background-color: #d72727;
+  flex: 1;
+  margin-left: 20px;
+  background-color: rgba(58, 58, 58, 0.9);
   padding: 20px;
+  border-radius: 10px;
 `;
 
-const Title = styled.div``;
+const Title = styled.h1`
+  font-size: 2.4em;
+  margin-bottom: 20px;
+  color: #ff6347;
+`;
 
-const AverageVote = styled.div``;
+const AverageVote = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`;
 
-const AverageVoteTitle = styled.div``;
+const AverageVoteTitle = styled.h2`
+  font-size: 1.2em;
+  margin-right: 10px;
+  color: #ffa07a;
+`;
 
-const Star = styled.div``;
+const ReleaseDate = styled.div`
+  margin-bottom: 20px;
+`;
 
-const ReleaseDate = styled.div``;
+const DateTitle = styled.h2`
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  color: #ffa07a;
+`;
 
-const DateTitle = styled.div``;
+const Date = styled.div`
+  font-size: 1.1em;
+  color: #ffffff;
+`;
 
-const Date = styled.div``;
+const Overview = styled.h2`
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  color: #ffa07a;
+`;
 
-const Overview = styled.div``;
-
-const OverviewDetail = styled.div``;
+const OverviewDetail = styled.p`
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #f5f5f5;
+`;
